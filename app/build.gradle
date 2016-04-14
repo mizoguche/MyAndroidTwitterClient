@@ -3,7 +3,7 @@ apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion "23.0.2"
 
     defaultConfig {
         applicationId "info.mizoguche.mytwitterclient"
@@ -11,6 +11,9 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+
+        buildConfigField 'String', 'CONSUMER_KEY', "\"${System.getenv('MY_ANDROID_TWITTER_CLIENT_CONSUMER_KEY')}\""
+        buildConfigField 'String', 'CONSUMER_SECRET', "\"${System.getenv('MY_ANDROID_TWITTER_CLIENT_CONSUMER_SECRET')}\""
     }
     buildTypes {
         release {
@@ -26,8 +29,14 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.0.1'
+    compile 'com.android.support:appcompat-v7:23.3.0'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    compile 'org.twitter4j:twitter4j-core:4.0.4'
+    compile 'io.reactivex:rxandroid:0.24.0'
+    compile 'io.reactivex:rxkotlin:0.55.0'
+    compile 'com.github.orhanobut:hawk:1.23'
+    compile 'com.google.code.gson:gson:2.6.2'
 }
 buildscript {
     ext.kotlin_version = '1.0.0'
