@@ -24,12 +24,20 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:cardview-v7:23.3.0'
+    compile 'com.android.support:recyclerview-v7:23.3.0'
+    compile 'com.android.support:design:23.3.0'
+    kapt 'com.android.databinding:compiler:1.0-rc5'
+
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     compile 'org.twitter4j:twitter4j-core:4.0.4'
@@ -37,6 +45,9 @@ dependencies {
     compile 'io.reactivex:rxkotlin:0.55.0'
     compile 'com.github.orhanobut:hawk:1.23'
     compile 'com.google.code.gson:gson:2.6.2'
+}
+kapt {
+    generateStubs = true
 }
 buildscript {
     ext.kotlin_version = '1.0.0'
