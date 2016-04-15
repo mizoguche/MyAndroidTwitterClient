@@ -1,13 +1,9 @@
 package info.mizoguche.mytwitterclient.domain.entity
 
-class Tweet {
-    val text: String
-        get
-    val username: String
-        get
-     constructor(text: String, username: String){
-         this.text = text
-         this.username = username
-     }
+import android.databinding.BaseObservable
+
+class Tweet(text: String, screenName: String) : BaseObservable() {
+    val text: String = text
+    val screenName: String = screenName
 }
 
