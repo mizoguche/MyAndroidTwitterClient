@@ -1,9 +1,35 @@
 package info.mizoguche.mytwitterclient.domain.entity
 
 import android.databinding.BaseObservable
+import info.mizoguche.mytwitterclient.domain.factory.UserFactory
+import java.util.*
 
-class Tweet(text: String, screenName: String) : BaseObservable() {
-    val text: String = text
-    val screenName: String = screenName
+data class TweetId(val value: Long)
+data class TweetText(val value: String)
+data class TweetDate(val value: Date)
+public enum class TweetType {
+    Tweet, Retweet
 }
 
+class Tweet(builder: TweetBuilder) : BaseObservable() {
+    val id: TweetId = TweetId(builder.id)
+    val text: TweetText = TweetText(builder.text)
+    val tweetedBy: User = UserFactory.create(builder.tweetedBy)
+    val createdAt: TweetDate = TweetDate(builder.createdAt)
+    val type: TweetType = builder.type
+    val retweetedBy: User? = if(builder.retweetedBy != null) UserFactory.create(builder.retweetedBy as twitter4j.User) else null
+}
+
+
+class TweetBuilder {
+    var id: Long = 0
+    lateinit  var text: String
+    lateinit  var tweetedBy: twitter4j.User
+    lateinit  var createdAt: Date
+    lateinit  var type: TweetType
+    var retweetedBy: twitter4j.User? = null
+
+    fun build(): Tweet {
+        return Tweet(this)
+    }
+}
