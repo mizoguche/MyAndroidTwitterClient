@@ -6,13 +6,33 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import com.squareup.picasso.Picasso
 import info.mizoguche.mytwitterclient.R
 import info.mizoguche.mytwitterclient.databinding.ViewTweetBinding
 import info.mizoguche.mytwitterclient.domain.collection.TimeLine
+import info.mizoguche.mytwitterclient.domain.entity.Tweet
+import info.mizoguche.mytwitterclient.domain.entity.TweetType
 
 
 class TweetViewHolder(view: View, binding: ViewTweetBinding) : RecyclerView.ViewHolder(view) {
+    val context: Context = view.context
     val binding: ViewTweetBinding = binding
+
+    fun bind(tweet: Tweet){
+        binding.tweet = tweet
+        bindImage(binding.profileImage, tweet.tweetedBy.profileImageUrl.medium)
+        if(tweet.type == TweetType.Retweet){
+            bindImage(binding.profileImageRetweetedBy, tweet.retweetedBy?.profileImageUrl?.medium as String)
+        }
+        binding.executePendingBindings()
+    }
+
+    private fun bindImage(view: ImageView, url: String){
+        Picasso.with(context)
+                .load(url)
+                .into(view)
+    }
 }
 
 class TimeLineAdapter(context: Context, timeLine: TimeLine) : RecyclerView.Adapter<TweetViewHolder>() {
@@ -21,8 +41,7 @@ class TimeLineAdapter(context: Context, timeLine: TimeLine) : RecyclerView.Adapt
 
     override fun onBindViewHolder(holder: TweetViewHolder?, position: Int) {
         if(holder != null){
-            holder.binding.tweet = timeLine[position]
-            holder.binding.executePendingBindings()
+            holder.bind(timeLine[position])
         }
     }
 

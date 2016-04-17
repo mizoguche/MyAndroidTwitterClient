@@ -1,0 +1,27 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+
+    <dimen name="smallest">8dp</dimen>
+    <dimen name="smaller">16dp</dimen>
+    <dimen name="small">32dp</dimen>
+    <dimen name="medium">40dp</dimen>
+    <dimen name="large">56dp</dimen>
+    <dimen name="larger">72dp</dimen>
+
+    <dimen name="touchTargetImage">48dp</dimen>
+    <dimen name="touchTargetImagePadding">4dp</dimen>
+
+    <dimen name="margin">@dimen/smaller</dimen>
+    <dimen name="marginSmall">@dimen/smallest</dimen>
+    <dimen name="marginSmaller">4dp</dimen>
+
+    <dimen name="cardMargin">@dimen/marginSmall</dimen>
+    <dimen name="cardPadding">@dimen/marginSmall</dimen>
+
+    <dimen name="profileImage">@dimen/touchTargetImage</dimen>
+    <dimen name="profileImagePadding">@dimen/touchTargetImagePadding</dimen>
+    <dimen name="profileImageQuoted">30dp</dimen>
+    <dimen name="profileImageRetweetedBy">20dp</dimen>
+
+    <dimen name="text">5pt</dimen>
+</resources>

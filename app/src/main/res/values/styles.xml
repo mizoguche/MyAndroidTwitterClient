@@ -1,11 +1,57 @@
 <resources>
+    <color name="bg">#F5F5F5</color>
+    <color name="bgPressed">#BDBDBD</color>
+    <color name="text">#212121</color>
+    <color name="textWeak">#9E9E9E</color>
+    <color name="textOnPrimary">#FAFAFA</color>
+    <color name="textTabSelected">@color/textOnPrimary</color>
+    <color name="textTabUnselected">#BDBDBD</color>
+    <color name="tabBg">@color/primaryLight</color>
+
+    <color name="primary">#2196F3</color>
+    <color name="primaryLight">#90CAF9</color>
+    <color name="primaryLighter">#BBDEFB</color>
+    <color name="primaryDark">#0D47A1</color>
+
+    <color name="accent">#FF5722</color>
+    <color name="accentLight">#FFAB91</color>
+    <color name="accentDark">#BF360C</color>
+
+    <color name="ripple">@color/primaryDark</color>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="AppTheme" parent="android:Theme.Holo.Light">
+        <item name="android:windowBackground">@color/bg</item>
+        <item name="android:textViewStyle">@style/text_view_style</item>
+        <item name="android:editTextStyle">@style/edit_text_style</item>
     </style>
 
+    <style name="AppThemeOverlayActionBar" parent="AppTheme">
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:actionBarStyle">@style/actionbar_overlay_tint_style</item>
+    </style>
+
+    <style name="actionbar_overlay_tint_style" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:titleTextStyle">@style/actionbar_title_text_style</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="actionbar_tint_style" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:titleTextStyle">@style/actionbar_title_text_style</item>
+        <item name="android:background">@color/primary</item>
+    </style>
+
+    <style name="actionbar_title_text_style" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/textOnPrimary</item>
+    </style>
+
+    <style name="text_view_style" parent="@android:style/Widget.Holo.Light.TextView">
+        <item name="android:textColor">@color/text</item>
+        <item name="android:textColorLink">@color/primary</item>
+        <item name="android:textSize">@dimen/text</item>
+    </style>
+
+    <style name="edit_text_style" parent="@android:style/Widget.Holo.Light.EditText">
+        <item name="android:textColor">@color/text</item>
+    </style>
 </resources>
