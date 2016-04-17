@@ -6,10 +6,7 @@ import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.lang.kotlin.observable
 import rx.schedulers.Schedulers
-import twitter4j.ResponseList
-import twitter4j.Status
-import twitter4j.Twitter
-import twitter4j.TwitterFactory
+import twitter4j.*
 import twitter4j.auth.AccessToken
 
 object  TwitterApi {
@@ -53,7 +50,7 @@ object  TwitterApi {
 
     fun homeTimeLine() : Observable<ResponseList<Status>> {
         return observable<ResponseList<Status>> {
-            it.onNext(twitter.homeTimeline)
+            it.onNext(twitter.getHomeTimeline(Paging(1, 50)))
             it.onCompleted()
         }.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
