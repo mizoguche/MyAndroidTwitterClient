@@ -7,7 +7,7 @@ import twitter4j.Status
 
 object  TweetFactory {
     fun create(status: Status): Tweet {
-        val builder = TweetBuilder()
+        val builder = TweetBuilder(status.id)
         if(status.isRetweet){
             builder.type = TweetType.Retweet
             builder.retweetedBy = status.user
@@ -21,7 +21,6 @@ object  TweetFactory {
     }
 
     private fun assignToBuilder(builder: TweetBuilder, status: Status) {
-        builder.id = status.id
         builder.text = status.text
         builder.tweetedBy = status.user
         builder.createdAt = status.createdAt

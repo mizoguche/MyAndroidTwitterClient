@@ -21,8 +21,8 @@ class Tweet(builder: TweetBuilder) : BaseObservable() {
 }
 
 
-class TweetBuilder {
-    var id: Long = 0
+class TweetBuilder(id: Long) {
+    val id: Long = id
     lateinit  var text: String
     lateinit  var tweetedBy: twitter4j.User
     lateinit  var createdAt: Date
