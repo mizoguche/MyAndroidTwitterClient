@@ -17,6 +17,9 @@
     <color name="accentLight">#FFAB91</color>
     <color name="accentDark">#BF360C</color>
 
+    <color name="retweet">#8BC34A</color>
+    <color name="like">#E91E63</color>
+
     <color name="ripple">@color/primaryDark</color>
 
     <!-- Base application theme. -->

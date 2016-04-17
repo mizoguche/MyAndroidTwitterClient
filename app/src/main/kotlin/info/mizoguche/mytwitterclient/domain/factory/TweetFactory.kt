@@ -24,5 +24,7 @@ object  TweetFactory {
         builder.text = status.text
         builder.tweetedBy = status.user
         builder.createdAt = status.createdAt
+        builder.isRetweeted = status.isRetweeted
+        builder.isLiked = status.isFavorited
     }
 }

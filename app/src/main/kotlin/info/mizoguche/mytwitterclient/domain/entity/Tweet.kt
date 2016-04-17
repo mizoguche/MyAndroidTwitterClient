@@ -10,6 +10,12 @@ data class TweetDate(val value: Date)
 public enum class TweetType {
     Tweet, Retweet
 }
+public enum class RetweetStatus {
+    None, Retweeted
+}
+public enum class LikeStatus {
+    None, Liked
+}
 
 class Tweet(builder: TweetBuilder) : BaseObservable() {
     val id: TweetId = TweetId(builder.id)
@@ -18,6 +24,8 @@ class Tweet(builder: TweetBuilder) : BaseObservable() {
     val createdAt: TweetDate = TweetDate(builder.createdAt)
     val type: TweetType = builder.type
     val retweetedBy: User? = if(builder.retweetedBy != null) UserFactory.create(builder.retweetedBy as twitter4j.User) else null
+    val retweetStatus: RetweetStatus = if(builder.isRetweeted) RetweetStatus.Retweeted else RetweetStatus.None
+    val likeStatus: LikeStatus = if(builder.isLiked) LikeStatus.Liked else LikeStatus.None
 }
 
 
@@ -28,6 +36,8 @@ class TweetBuilder(id: Long) {
     lateinit  var createdAt: Date
     lateinit  var type: TweetType
     var retweetedBy: twitter4j.User? = null
+    var isRetweeted: Boolean = false
+    var isLiked: Boolean = false
 
     fun build(): Tweet {
         return Tweet(this)

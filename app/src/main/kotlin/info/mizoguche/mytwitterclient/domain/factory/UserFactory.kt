@@ -1,6 +1,7 @@
 package info.mizoguche.mytwitterclient.domain.factory
 
-import info.mizoguche.mytwitterclient.domain.entity.*
+import info.mizoguche.mytwitterclient.domain.entity.User
+import info.mizoguche.mytwitterclient.domain.entity.UserBuilder
 
 object  UserFactory {
     fun create(user: twitter4j.User): User{
