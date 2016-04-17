@@ -22,6 +22,7 @@ class TimeLineAdapter(context: Context, timeLine: TimeLine) : RecyclerView.Adapt
     override fun onBindViewHolder(holder: TweetViewHolder?, position: Int) {
         if(holder != null){
             holder.binding.tweet = timeLine[position]
+            holder.binding.executePendingBindings()
         }
     }
 
