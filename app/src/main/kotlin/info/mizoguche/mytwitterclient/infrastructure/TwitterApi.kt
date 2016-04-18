@@ -55,4 +55,12 @@ object  TwitterApi {
         }.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
     }
+
+    fun ownLists(): Observable<ResponseList<UserList>> {
+        return observable<ResponseList<UserList>> {
+            it.onNext(twitter.getUserLists(twitter.id))
+            it.onCompleted()
+        }.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
 }
