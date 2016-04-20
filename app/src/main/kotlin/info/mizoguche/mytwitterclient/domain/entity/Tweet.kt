@@ -28,7 +28,6 @@ class Tweet(builder: TweetBuilder) : BaseObservable() {
     val likeStatus: LikeStatus = if(builder.isLiked) LikeStatus.Liked else LikeStatus.None
 }
 
-
 class TweetBuilder(id: Long) {
     val id: Long = id
     lateinit  var text: String

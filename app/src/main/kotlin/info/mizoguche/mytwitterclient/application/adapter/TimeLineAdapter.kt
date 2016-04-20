@@ -40,9 +40,7 @@ class TimeLineAdapter(context: Context, timeLine: TimeLine) : RecyclerView.Adapt
     val timeLine: TimeLine = timeLine
 
     override fun onBindViewHolder(holder: TweetViewHolder?, position: Int) {
-        if(holder != null){
-            holder.bind(timeLine[position])
-        }
+        holder?.bind(timeLine[position])
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): TweetViewHolder? {

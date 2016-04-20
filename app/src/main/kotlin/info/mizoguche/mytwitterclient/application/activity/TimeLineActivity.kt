@@ -6,6 +6,8 @@ import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.Menu
+import android.view.MenuItem
 import info.mizoguche.mytwitterclient.R
 import info.mizoguche.mytwitterclient.application.adapter.TimeLineAdapter
 import info.mizoguche.mytwitterclient.databinding.ActivityTimeLineBinding
@@ -33,6 +35,19 @@ class TimeLineActivity : Activity() {
                     val adapter = TimeLineAdapter(this, it)
                     recyclerView.adapter = adapter
                 }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.time_line_menu, menu)
+        return true
+    }
+
+    override fun onMenuItemSelected(featureId: Int, item: MenuItem?): Boolean {
+        if(item?.itemId == R.id.action_settings){
+            val intent = TabPreferencesActivity.createIntent(this)
+            startActivity(intent)
+        }
+        return super.onMenuItemSelected(featureId, item)
     }
 
     companion object {

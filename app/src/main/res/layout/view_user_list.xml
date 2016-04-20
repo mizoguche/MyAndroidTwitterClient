@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="userList" type="info.mizoguche.mytwitterclient.domain.entity.UserList" />
+        <import type="info.mizoguche.mytwitterclient.domain.entity.UserListAccessLevel" />
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/cardPadding"
+        >
+        <TextView
+            android:id="@+id/user_list_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{'@' + userList.screenName.value + '/' + userList.name.value}"
+            />
+        <TextView
+            android:id="@+id/user_list_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/user_list_name"
+            android:text="@{userList.description.value}"
+            />
+    </RelativeLayout>
+</layout>

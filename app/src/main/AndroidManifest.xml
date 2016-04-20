@@ -29,6 +29,8 @@
                 <data android:scheme="mytwitterclient" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".application.activity.TabPreferencesActivity" />
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
