@@ -12,7 +12,8 @@ object  TabRepository {
     fun getTabs(): Tabs {
         val defaultTabs = ArrayList<Tab>()
         defaultTabs.add(Tab(TabName("Home"), TabDetail(TabDetailHome, 0)))
-        return Hawk.get<Tabs>("Tabs", Tabs(defaultTabs))
+        val tabList = Hawk.get<ArrayList<Tab>>("Tabs", defaultTabs)
+        return Tabs(tabList)
     }
 
     fun putTabs(tabs: Tabs){
