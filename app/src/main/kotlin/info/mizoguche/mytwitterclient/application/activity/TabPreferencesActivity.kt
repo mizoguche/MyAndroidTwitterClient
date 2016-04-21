@@ -1,11 +1,11 @@
 package info.mizoguche.mytwitterclient.application.activity
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.graphics.Color
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
@@ -18,8 +18,12 @@ import info.mizoguche.mytwitterclient.application.view.UserListDialog
 import info.mizoguche.mytwitterclient.databinding.ActivityTabPreferencesBinding
 import info.mizoguche.mytwitterclient.domain.collection.Tabs
 import info.mizoguche.mytwitterclient.domain.repository.TabRepository
+import info.mizoguche.mytwitterclient.domain.value.Tab
+import info.mizoguche.mytwitterclient.domain.value.TabDetail
+import info.mizoguche.mytwitterclient.domain.value.TabDetailHome
+import info.mizoguche.mytwitterclient.domain.value.TabName
 
-class TabPreferencesActivity: Activity() {
+class TabPreferencesActivity: AppCompatActivity() {
     lateinit var tabs: Tabs
     lateinit var adapter: TabsAdapter
 
@@ -82,15 +86,18 @@ class TabPreferencesActivity: Activity() {
         return true
     }
 
-    override fun onMenuItemSelected(featureId: Int, item: MenuItem?): Boolean {
-        if(item?.itemId == R.id.action_add_user_list){
-            UserListDialog.show(this, { addedTabs ->
-                tabs.addAll(addedTabs)
-                TabRepository.putTabs(tabs)
-                adapter.notifyDataSetChanged()
-            })
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId){
+            R.id.action_add_user_list -> {
+                UserListDialog.show(this, { addedTabs ->
+                    tabs.addAll(addedTabs)
+                    TabRepository.putTabs(tabs)
+                    adapter.notifyDataSetChanged()
+                })
+            }
+            R.id.action_add_home_time_line -> tabs.add(Tab(TabName("Home"), TabDetail(TabDetailHome, 1)))
         }
-        return super.onMenuItemSelected(featureId, item)
+        return super.onOptionsItemSelected(item)
     }
 
     companion object {
