@@ -34,5 +34,16 @@ class TabsAdapter(val context: Context, val tabs: Tabs) : RecyclerView.Adapter<T
     override fun getItemCount(): Int {
         return tabs.count()
     }
+
+    fun move(from: Int, to: Int){
+        val movingTab = tabs.removeAt(from)
+        tabs.add(to, movingTab)
+        notifyItemMoved(from, to)
+    }
+
+    fun remove(at: Int){
+        tabs.removeAt(at)
+        notifyItemRemoved(at)
+    }
 }
 

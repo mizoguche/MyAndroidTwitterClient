@@ -4,12 +4,16 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.databinding.DataBindingUtil
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.Menu
 import android.view.MenuItem
 import info.mizoguche.mytwitterclient.R
 import info.mizoguche.mytwitterclient.application.adapter.TabsAdapter
+import info.mizoguche.mytwitterclient.application.decorator.DividerItemDecoration
 import info.mizoguche.mytwitterclient.application.view.UserListDialog
 import info.mizoguche.mytwitterclient.databinding.ActivityTabPreferencesBinding
 import info.mizoguche.mytwitterclient.domain.collection.Tabs
@@ -30,6 +34,43 @@ class TabPreferencesActivity: Activity() {
         tabs = TabRepository.getTabs()
         adapter = TabsAdapter(this, tabs)
         recyclerView.adapter = adapter
+
+        val callback = object : ItemTouchHelper.Callback(){
+            override fun getMovementFlags(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?): Int {
+                return makeFlag(ItemTouchHelper.ACTION_STATE_IDLE, ItemTouchHelper.RIGHT) or
+                makeFlag(ItemTouchHelper.ACTION_STATE_SWIPE, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) or
+                makeFlag(ItemTouchHelper.ACTION_STATE_DRAG, ItemTouchHelper.DOWN or ItemTouchHelper.UP)
+            }
+
+            override fun onMove(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?, target: RecyclerView.ViewHolder?): Boolean {
+                val from = viewHolder?.adapterPosition as Int
+                val to = target?.adapterPosition as Int
+                adapter.move(from, to)
+                saveTabs()
+                return true
+            }
+
+            override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
+                super.onSelectedChanged(viewHolder, actionState)
+                if(actionState != ItemTouchHelper.ACTION_STATE_IDLE){
+                    viewHolder?.itemView?.setBackgroundColor(Color.LTGRAY)
+                }
+            }
+
+            override fun clearView(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?) {
+                super.clearView(recyclerView, viewHolder)
+                viewHolder?.itemView?.setBackgroundColor(Color.TRANSPARENT)
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder?, direction: Int) {
+                adapter.remove(viewHolder?.adapterPosition as Int)
+                saveTabs()
+            }
+        }
+        val helper = ItemTouchHelper(callback)
+        helper.attachToRecyclerView(recyclerView)
+        recyclerView.addItemDecoration(helper)
+        recyclerView.addItemDecoration(DividerItemDecoration(this))
     }
 
     fun saveTabs(){
