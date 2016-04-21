@@ -30,7 +30,7 @@ class TimeLineActivity : Activity() {
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
 
-        TimeLineRepository.getHomeTimeLine()
+        TimeLineRepository.fetchHomeTimeLine()
                 .subscribe {
                     val adapter = TimeLineAdapter(this, it)
                     recyclerView.adapter = adapter

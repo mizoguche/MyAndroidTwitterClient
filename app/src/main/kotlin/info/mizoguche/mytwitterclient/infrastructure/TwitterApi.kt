@@ -2,6 +2,7 @@ package info.mizoguche.mytwitterclient.infrastructure
 
 import com.orhanobut.hawk.Hawk
 import info.mizoguche.mytwitterclient.BuildConfig
+import info.mizoguche.mytwitterclient.domain.entity.UserListId
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.lang.kotlin.observable
@@ -49,16 +50,20 @@ object  TwitterApi {
     }
 
     fun homeTimeLine() : Observable<ResponseList<Status>> {
-        return observable<ResponseList<Status>> {
-            it.onNext(twitter.getHomeTimeline(Paging(1, 50)))
-            it.onCompleted()
-        }.subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
+        return fetchResponseList<Status> { twitter.getHomeTimeline(Paging(1, 50)) }
+    }
+
+    fun userListTimeLine(userListId: UserListId) : Observable<ResponseList<Status>> {
+        return fetchResponseList<Status> { twitter.getUserListStatuses(userListId.value, Paging(1, 50)) }
     }
 
     fun ownLists(): Observable<ResponseList<UserList>> {
-        return observable<ResponseList<UserList>> {
-            it.onNext(twitter.getUserLists(twitter.id, true))
+        return fetchResponseList<UserList> { twitter.getUserLists(twitter.id, true) }
+    }
+
+    fun <T> fetchResponseList(action: () -> ResponseList<T>) : Observable<ResponseList<T>> {
+        return observable<ResponseList<T>> {
+            it.onNext(action())
             it.onCompleted()
         }.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

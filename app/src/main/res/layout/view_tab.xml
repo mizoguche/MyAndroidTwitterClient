@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="tab" type="info.mizoguche.mytwitterclient.domain.value.Tab" />
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/listItemTwoLineHeight"
+        android:paddingLeft="@dimen/listItemHorizontalPadding"
+        android:paddingRight="@dimen/listItemHorizontalPadding"
+        android:paddingTop="@dimen/listItemVerticalPadding"
+        android:paddingBottom="@dimen/listItemVerticalPadding"
+        >
+        <TextView
+            android:id="@+id/tab_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{tab.name.value}"
+            android:textSize="@dimen/listItemPrimaryTextSize"
+            />
+    </RelativeLayout>
+</layout>

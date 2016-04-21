@@ -1,13 +1,24 @@
 package info.mizoguche.mytwitterclient.domain.repository
 
 import info.mizoguche.mytwitterclient.domain.collection.TimeLine
+import info.mizoguche.mytwitterclient.domain.entity.UserListId
 import info.mizoguche.mytwitterclient.domain.factory.TweetFactory
 import info.mizoguche.mytwitterclient.infrastructure.TwitterApi
 import rx.Observable
+import twitter4j.ResponseList
+import twitter4j.Status
 
 object  TimeLineRepository {
-    fun getHomeTimeLine(): Observable<TimeLine> {
-        return TwitterApi.homeTimeLine()
+    fun fetchHomeTimeLine(): Observable<TimeLine> {
+        return mapStatusListToTimeLine(TwitterApi.homeTimeLine())
+    }
+
+    fun fetchUserListTimeLine(userListId: UserListId): Observable<TimeLine> {
+        return mapStatusListToTimeLine(TwitterApi.userListTimeLine(userListId))
+    }
+
+    private fun mapStatusListToTimeLine(responseList: Observable<ResponseList<Status>>) : Observable<TimeLine>{
+        return responseList
                 .map { it.map { TweetFactory.create(it) }.toList() }
                 .map { TimeLine(it) }
     }

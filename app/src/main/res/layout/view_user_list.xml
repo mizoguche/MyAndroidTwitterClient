@@ -2,26 +2,42 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
-        <variable name="userList" type="info.mizoguche.mytwitterclient.domain.entity.UserList" />
+        <variable name="userListSelection" type="info.mizoguche.mytwitterclient.application.adapter.UserListSelection" />
+        <import type="info.mizoguche.mytwitterclient.domain.entity.UserList" />
         <import type="info.mizoguche.mytwitterclient.domain.entity.UserListAccessLevel" />
     </data>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/cardPadding"
+        android:layout_height="@dimen/listItemTwoLineHeight"
+        android:paddingTop="@dimen/listItemVerticalPadding"
+        android:paddingBottom="@dimen/listItemVerticalPadding"
         >
+        <CheckBox
+            android:id="@+id/user_list_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/listItemHorizontalPadding"
+            android:checked="@{userListSelection.isSelected}"
+            />
         <TextView
             android:id="@+id/user_list_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{'@' + userList.screenName.value + '/' + userList.name.value}"
+            android:layout_marginLeft="@dimen/listItemWithIconTextLeftPadding"
+            android:layout_marginRight="@dimen/listItemHorizontalPadding"
+            android:text="@{'@' + userListSelection.userList.screenName.value + '/' + userListSelection.userList.name.value}"
+            android:textSize="@dimen/listItemPrimaryTextSize"
             />
         <TextView
             android:id="@+id/user_list_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/user_list_name"
-            android:text="@{userList.description.value}"
+            android:layout_marginLeft="@dimen/listItemWithIconTextLeftPadding"
+            android:layout_marginRight="@dimen/listItemHorizontalPadding"
+            android:text="@{userListSelection.userList.description.value}"
+            android:textSize="@dimen/listItemSecondaryTextSize"
+            android:textColor="@color/textWeak"
             />
     </RelativeLayout>
 </layout>

@@ -18,6 +18,14 @@
     <dimen name="cardMargin">@dimen/marginSmall</dimen>
     <dimen name="cardPadding">@dimen/marginSmall</dimen>
 
+    <dimen name="listItemPrimaryTextSize">16sp</dimen>
+    <dimen name="listItemSecondaryTextSize">14sp</dimen>
+    <dimen name="listItemTwoLineHeight">72dp</dimen>
+    <dimen name="listItemWithIconTextLeftPadding">72dp</dimen>
+    <dimen name="listTopPadding">8dp</dimen>
+    <dimen name="listItemVerticalPadding">20dp</dimen>
+    <dimen name="listItemHorizontalPadding">16dp</dimen>
+
     <dimen name="profileImage">@dimen/touchTargetImage</dimen>
     <dimen name="profileImagePadding">@dimen/touchTargetImagePadding</dimen>
     <dimen name="profileImageQuoted">30dp</dimen>
