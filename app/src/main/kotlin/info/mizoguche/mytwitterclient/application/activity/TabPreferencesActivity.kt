@@ -1,27 +1,24 @@
 package info.mizoguche.mytwitterclient.application.activity
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.widget.ListView
+import android.view.Menu
+import android.view.MenuItem
 import info.mizoguche.mytwitterclient.R
 import info.mizoguche.mytwitterclient.application.adapter.TabsAdapter
-import info.mizoguche.mytwitterclient.application.adapter.UserListsAdapter
+import info.mizoguche.mytwitterclient.application.view.UserListDialog
 import info.mizoguche.mytwitterclient.databinding.ActivityTabPreferencesBinding
 import info.mizoguche.mytwitterclient.domain.collection.Tabs
 import info.mizoguche.mytwitterclient.domain.repository.TabRepository
-import info.mizoguche.mytwitterclient.domain.repository.UserListRepository
-import info.mizoguche.mytwitterclient.domain.value.Tab
-import info.mizoguche.mytwitterclient.domain.value.TabDetail
-import info.mizoguche.mytwitterclient.domain.value.TabDetailUserList
-import info.mizoguche.mytwitterclient.domain.value.TabName
 
 class TabPreferencesActivity: Activity() {
+    lateinit var tabs: Tabs
+    lateinit var adapter: TabsAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tab_preferences)
@@ -30,33 +27,29 @@ class TabPreferencesActivity: Activity() {
         val recyclerView = binding.recyclerView
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        val tabs = TabRepository.getTabs()
-        val adapter = TabsAdapter(this, tabs)
+        tabs = TabRepository.getTabs()
+        adapter = TabsAdapter(this, tabs)
         recyclerView.adapter = adapter
-
-        UserListRepository.getUserLists()
-                .subscribe {
-                    val listView = ListView(this)
-                    val listAdapter = UserListsAdapter(this, it)
-                    listView.adapter = listAdapter
-                    AlertDialog.Builder(this)
-                            .setTitle("Add User List Tab")
-                            .setView(listView)
-                            .setPositiveButton("Add", DialogInterface.OnClickListener { dialogInterface, i ->
-                                listAdapter.checkedUserLists()
-                                .forEach {
-                                    tabs.add(Tab(TabName(it.name.value), TabDetail(TabDetailUserList, it.id.value)))
-                                    adapter.notifyDataSetChanged()
-                                    saveTabs(tabs)
-                                }
-                             })
-                            .setNegativeButton("Cancel", null)
-                            .show()
-                }
     }
 
-    fun saveTabs(tabs: Tabs){
+    fun saveTabs(){
         TabRepository.putTabs(tabs)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.tab_preferences_menu, menu)
+        return true
+    }
+
+    override fun onMenuItemSelected(featureId: Int, item: MenuItem?): Boolean {
+        if(item?.itemId == R.id.action_add_user_list){
+            UserListDialog.show(this, { addedTabs ->
+                tabs.addAll(addedTabs)
+                TabRepository.putTabs(tabs)
+                adapter.notifyDataSetChanged()
+            })
+        }
+        return super.onMenuItemSelected(featureId, item)
     }
 
     companion object {

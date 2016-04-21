@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/action_add_home_time_line"
+        android:title="Add Home Time Line"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/action_add_mention_time_line"
+        android:title="Add Mention Time Line"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/action_add_user_list"
+        android:title="Add User List"
+        app:showAsAction="never"/>
+
+</menu>
