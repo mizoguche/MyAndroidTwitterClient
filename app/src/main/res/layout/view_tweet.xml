@@ -80,6 +80,7 @@
                 android:layout_alignLeft="@id/tweeted_by"
                 android:layout_below="@id/tweeted_by"
                 android:layout_marginTop="@dimen/marginSmaller"
+                android:autoLink="web"
                 />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
