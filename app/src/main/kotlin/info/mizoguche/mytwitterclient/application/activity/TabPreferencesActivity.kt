@@ -57,7 +57,7 @@ class TabPreferencesActivity: AppCompatActivity() {
             override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
                 super.onSelectedChanged(viewHolder, actionState)
                 if(actionState != ItemTouchHelper.ACTION_STATE_IDLE){
-                    viewHolder?.itemView?.setBackgroundColor(Color.LTGRAY)
+                    viewHolder?.itemView?.setBackgroundColor(Color.argb(64, 128, 128, 128))
                 }
             }
 
