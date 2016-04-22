@@ -26,10 +26,11 @@
     <dimen name="listItemVerticalPadding">20dp</dimen>
     <dimen name="listItemHorizontalPadding">16dp</dimen>
 
+    <dimen name="tweetPrimaryTextSize">10sp</dimen>
+    <dimen name="tweetSecondaryTextSize">8sp</dimen>
+
     <dimen name="profileImage">@dimen/touchTargetImage</dimen>
     <dimen name="profileImagePadding">@dimen/touchTargetImagePadding</dimen>
     <dimen name="profileImageQuoted">30dp</dimen>
     <dimen name="profileImageRetweetedBy">20dp</dimen>
-
-    <dimen name="text">5pt</dimen>
 </resources>

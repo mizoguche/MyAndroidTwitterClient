@@ -33,32 +33,22 @@
         <item name="android:editTextStyle">@style/edit_text_style</item>
     </style>
 
-    <style name="AppThemeOverlayActionBar" parent="AppTheme">
-        <item name="android:windowActionBarOverlay">true</item>
-        <item name="android:actionBarStyle">@style/actionbar_overlay_tint_style</item>
-    </style>
-
-    <style name="actionbar_overlay_tint_style" parent="@android:style/Widget.Holo.Light.ActionBar">
-        <item name="android:titleTextStyle">@style/actionbar_title_text_style</item>
-        <item name="android:background">@android:color/transparent</item>
-    </style>
-
-    <style name="actionbar_tint_style" parent="@android:style/Widget.Holo.Light.ActionBar">
-        <item name="android:titleTextStyle">@style/actionbar_title_text_style</item>
-        <item name="android:background">@color/primary</item>
-    </style>
-
-    <style name="actionbar_title_text_style" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/textOnPrimary</item>
-    </style>
-
     <style name="text_view_style" parent="@android:style/Widget.Holo.Light.TextView">
         <item name="android:textColor">@color/text</item>
         <item name="android:textColorLink">@color/primary</item>
-        <item name="android:textSize">@dimen/text</item>
     </style>
 
     <style name="edit_text_style" parent="@android:style/Widget.Holo.Light.EditText">
         <item name="android:textColor">@color/text</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:background">@color/primary</item>
+        <item name="android:textColorPrimary">@color/textOnPrimary</item>
+    </style>
+
+    <style name="ToolbarPopupTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:actionMenuTextColor">@color/text</item>
     </style>
 </resources>

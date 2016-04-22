@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import info.mizoguche.mytwitterclient.R
+import info.mizoguche.mytwitterclient.application.decorator.DividerItemDecoration
 import info.mizoguche.mytwitterclient.domain.collection.Tabs
 import java.util.*
 
@@ -20,6 +21,7 @@ class TabPagerAdapter(val tabs: Tabs, val context: Context): PagerAdapter(){
                     .findViewById(R.id.recycler_view) as RecyclerView
             val layoutManager = LinearLayoutManager(context)
             recyclerView.layoutManager = layoutManager
+            recyclerView.addItemDecoration(DividerItemDecoration(context))
             it.timeLine()
                     .subscribe {
                         val adapter = TimeLineAdapter(context, it)
