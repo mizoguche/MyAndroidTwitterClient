@@ -3,7 +3,9 @@ package info.mizoguche.mytwitterclient.application.view
 import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Context
+import android.widget.CheckBox
 import android.widget.ListView
+import info.mizoguche.mytwitterclient.R
 import info.mizoguche.mytwitterclient.application.adapter.UserListsAdapter
 import info.mizoguche.mytwitterclient.domain.collection.Tabs
 import info.mizoguche.mytwitterclient.domain.repository.UserListRepository
@@ -22,6 +24,10 @@ object UserListDialog {
                     val listView = ListView(context)
                     val listAdapter = UserListsAdapter(context, it)
                     listView.adapter = listAdapter
+                    listView.setOnItemClickListener { adapterView, view, i, l ->
+                        val checkbox = view.findViewById(R.id.user_list_checkbox) as CheckBox
+                        checkbox.toggle()
+                    }
                     showDialog(callback, context, listAdapter, listView)
                 }
     }

@@ -19,7 +19,7 @@
     <dimen name="cardPadding">@dimen/marginSmall</dimen>
 
     <dimen name="listItemPrimaryTextSize">16sp</dimen>
-    <dimen name="listItemSecondaryTextSize">14sp</dimen>
+    <dimen name="listItemSecondaryTextSize">12sp</dimen>
     <dimen name="listItemTwoLineHeight">72dp</dimen>
     <dimen name="listItemWithIconTextLeftPadding">72dp</dimen>
     <dimen name="listTopPadding">8dp</dimen>

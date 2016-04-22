@@ -5,39 +5,50 @@
         <variable name="userListSelection" type="info.mizoguche.mytwitterclient.application.adapter.UserListSelection" />
         <import type="info.mizoguche.mytwitterclient.domain.entity.UserList" />
         <import type="info.mizoguche.mytwitterclient.domain.entity.UserListAccessLevel" />
+        <import type="android.view.View" />
     </data>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/listItemTwoLineHeight"
-        android:paddingTop="@dimen/listItemVerticalPadding"
-        android:paddingBottom="@dimen/listItemVerticalPadding"
         >
         <CheckBox
             android:id="@+id/user_list_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/listItemHorizontalPadding"
+            android:layout_centerVertical="true"
             android:checked="@{userListSelection.isSelected}"
             />
-        <TextView
-            android:id="@+id/user_list_name"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/listItemWithIconTextLeftPadding"
             android:layout_marginRight="@dimen/listItemHorizontalPadding"
-            android:text="@{'@' + userListSelection.userList.screenName.value + '/' + userListSelection.userList.name.value}"
-            android:textSize="@dimen/listItemPrimaryTextSize"
-            />
-        <TextView
-            android:id="@+id/user_list_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/user_list_name"
-            android:layout_marginLeft="@dimen/listItemWithIconTextLeftPadding"
-            android:layout_marginRight="@dimen/listItemHorizontalPadding"
-            android:text="@{userListSelection.userList.description.value}"
-            android:textSize="@dimen/listItemSecondaryTextSize"
-            android:textColor="@color/textWeak"
-            />
+            android:orientation="vertical"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_vertical|left"
+            >
+            <TextView
+                android:id="@+id/user_list_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{'@' + userListSelection.userList.screenName.value + '/' + userListSelection.userList.name.value}"
+                android:textSize="@dimen/listItemPrimaryTextSize"
+                android:maxLines="1"
+                android:ellipsize="end"
+                />
+            <TextView
+                android:id="@+id/user_list_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{userListSelection.userList.description.value}"
+                android:visibility="@{userListSelection.userList.description.value == null || userListSelection.userList.description.value.length() == 0 ? View.GONE : View.VISIBLE}"
+                android:textSize="@dimen/listItemSecondaryTextSize"
+                android:textColor="@color/textWeak"
+                android:maxLines="1"
+                android:ellipsize="end"
+                />
+        </LinearLayout>
     </RelativeLayout>
 </layout>
