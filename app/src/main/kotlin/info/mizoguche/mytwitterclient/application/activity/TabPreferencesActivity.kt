@@ -75,6 +75,8 @@ class TabPreferencesActivity: AppCompatActivity() {
         helper.attachToRecyclerView(recyclerView)
         recyclerView.addItemDecoration(helper)
         recyclerView.addItemDecoration(DividerItemDecoration(this))
+
+        setSupportActionBar(binding.toolBar)
     }
 
     fun saveTabs(){

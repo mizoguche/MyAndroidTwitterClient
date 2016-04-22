@@ -40,6 +40,7 @@ class TimeLineActivity : AppCompatActivity() {
             override fun onTabReselected(tab: TabLayout.Tab?) { }
 
         })
+        setSupportActionBar(binding.toolBar)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
