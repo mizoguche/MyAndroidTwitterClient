@@ -14,6 +14,7 @@ import info.mizoguche.mytwitterclient.domain.value.Tab
 class SwipeRefreshTimeLineView(context: Context, attrs: AttributeSet): SwipeRefreshLayout(context, attrs){
     lateinit var recyclerView: RecyclerView
     init {
+        setColorSchemeResources(R.color.primary, R.color.primaryDark, R.color.accent, R.color.accentLight)
         setOnRefreshListener {
             fetch(true)
         }
