@@ -21,7 +21,7 @@ class TweetViewHolder(view: View, binding: ViewTweetBinding) : RecyclerView.View
 
     fun bind(tweet: Tweet){
         binding.tweet = tweet
-        bindImage(binding.profileImage, tweet.tweetedBy.profileImageUrl.medium)
+        bindImage(binding.profileImage, tweet.tweetedBy.profileImageUrl.big)
         if(tweet.type == TweetType.Retweet){
             bindImage(binding.profileImageRetweetedBy, tweet.retweetedBy?.profileImageUrl?.medium as String)
         }
