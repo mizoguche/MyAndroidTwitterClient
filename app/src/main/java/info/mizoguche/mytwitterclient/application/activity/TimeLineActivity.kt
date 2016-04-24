@@ -47,6 +47,9 @@ class TimeLineActivity : AppCompatActivity() {
         val params = binding.floatingActionButton.layoutParams as CoordinatorLayout.LayoutParams
         params.behavior = ScrollFABBehavior()
         binding.floatingActionButton.layoutParams = params
+        binding.floatingActionButton.setOnClickListener {
+            startActivity(TweetingActivity.createIntent(this))
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
