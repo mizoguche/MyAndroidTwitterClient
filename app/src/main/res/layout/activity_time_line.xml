@@ -44,6 +44,7 @@
             android:layout_gravity="bottom|end"
             android:layout_marginBottom="@dimen/margin"
             android:layout_marginRight="@dimen/margin"
+            app:rippleColor="@color/ripple"
             />
     </android.support.design.widget.CoordinatorLayout>
 </layout>
