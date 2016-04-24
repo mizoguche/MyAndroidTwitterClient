@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.design.widget.CoordinatorLayout
 import android.support.design.widget.TabLayout
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
@@ -13,6 +14,7 @@ import info.mizoguche.mytwitterclient.application.adapter.TabPagerAdapter
 import info.mizoguche.mytwitterclient.databinding.ActivityTimeLineBinding
 import info.mizoguche.mytwitterclient.domain.repository.TabRepository
 import info.mizoguche.mytwitterclient.infrastructure.TwitterApi
+import jp.tsur.booksearch.ui.ScrollFABBehavior
 
 class TimeLineActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +43,10 @@ class TimeLineActivity : AppCompatActivity() {
 
         })
         setSupportActionBar(binding.toolBar)
+
+        val params = binding.floatingActionButton.layoutParams as CoordinatorLayout.LayoutParams
+        params.behavior = ScrollFABBehavior()
+        binding.floatingActionButton.layoutParams = params
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
