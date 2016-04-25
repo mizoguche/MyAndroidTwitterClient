@@ -2,6 +2,7 @@ package info.mizoguche.mytwitterclient.infrastructure
 
 import com.orhanobut.hawk.Hawk
 import info.mizoguche.mytwitterclient.BuildConfig
+import info.mizoguche.mytwitterclient.domain.entity.UserId
 import info.mizoguche.mytwitterclient.domain.entity.UserListId
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
@@ -55,6 +56,10 @@ object  TwitterApi {
 
     fun userListTimeLine(userListId: UserListId) : Observable<ResponseList<Status>> {
         return fetchResponseList<Status> { twitter.getUserListStatuses(userListId.value, Paging(1, 50)) }
+    }
+
+    fun userTimeLine(userId: UserId) : Observable<ResponseList<Status>> {
+        return fetchResponseList<Status> { twitter.getUserTimeline(userId.value, Paging(1, 50)) }
     }
 
     fun ownLists(): Observable<ResponseList<UserList>> {

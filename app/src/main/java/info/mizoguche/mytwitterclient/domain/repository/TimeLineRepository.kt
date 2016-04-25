@@ -1,6 +1,7 @@
 package info.mizoguche.mytwitterclient.domain.repository
 
 import info.mizoguche.mytwitterclient.domain.collection.TimeLine
+import info.mizoguche.mytwitterclient.domain.entity.UserId
 import info.mizoguche.mytwitterclient.domain.entity.UserListId
 import info.mizoguche.mytwitterclient.domain.factory.TweetFactory
 import info.mizoguche.mytwitterclient.infrastructure.TwitterApi
@@ -15,6 +16,10 @@ object  TimeLineRepository {
 
     fun fetchUserListTimeLine(userListId: UserListId): Observable<TimeLine> {
         return mapStatusListToTimeLine(TwitterApi.userListTimeLine(userListId))
+    }
+
+    fun fetchUserTimeLine(userId: UserId): Observable<TimeLine> {
+        return mapStatusListToTimeLine(TwitterApi.userTimeLine(userId))
     }
 
     private fun mapStatusListToTimeLine(responseList: Observable<ResponseList<Status>>) : Observable<TimeLine>{
