@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import com.squareup.picasso.Picasso
 import info.mizoguche.mytwitterclient.R
+import info.mizoguche.mytwitterclient.application.activity.UserActivity
 import info.mizoguche.mytwitterclient.databinding.ViewTweetBinding
 import info.mizoguche.mytwitterclient.domain.collection.TimeLine
 import info.mizoguche.mytwitterclient.domain.entity.Tweet
@@ -22,6 +23,9 @@ class TweetViewHolder(view: View, binding: ViewTweetBinding) : RecyclerView.View
     fun bind(tweet: Tweet){
         binding.tweet = tweet
         bindImage(binding.profileImage, tweet.tweetedBy.profileImageUrl.big)
+        binding.profileImage.setOnClickListener {
+            context.startActivity(UserActivity.createIntent(context, tweet.tweetedBy))
+        }
         if(tweet.type == TweetType.Retweet){
             bindImage(binding.profileImageRetweetedBy, tweet.retweetedBy?.profileImageUrl?.medium as String)
         }

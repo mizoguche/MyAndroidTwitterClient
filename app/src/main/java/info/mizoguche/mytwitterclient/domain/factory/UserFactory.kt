@@ -11,6 +11,11 @@ object  UserFactory {
         builder.profileImageUrlBigger = user.biggerProfileImageURL
         builder.profileImageUrlMedium = user.profileImageURL
         builder.profileImageUrlSmall = user.miniProfileImageURL
+        if(user.profileBannerURL != null){
+            builder.profileBannerUrlBigger = user.profileBannerURL
+            builder.profileBannerUrlMedium = user.profileBannerIPadRetinaURL
+            builder.profileBannerUrlSmall = user.profileBannerMobileRetinaURL
+        }
         return User(builder)
     }
 }
