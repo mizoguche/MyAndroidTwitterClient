@@ -5,6 +5,8 @@
     <color name="text">#212121</color>
     <color name="textWeak">#9E9E9E</color>
     <color name="textOnPrimary">#FAFAFA</color>
+    <color name="textWeakOnPrimary">#BDBDBD</color>
+    <color name="textOnPrimaryTransparent">#00FAFAFA</color>
     <color name="textTabSelected">@color/textOnPrimary</color>
     <color name="textTabUnselected">#BDBDBD</color>
     <color name="tabBg">@color/primaryLight</color>

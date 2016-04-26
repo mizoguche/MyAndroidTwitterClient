@@ -29,4 +29,12 @@
         <item name="android:background">@android:color/transparent</item>
         <item name="android:actionMenuTextColor">@color/text</item>
     </style>
+
+    <style name="TransparentText" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/textOnPrimaryTransparent</item>
+    </style>
+
+    <style name="TextOnPrimary" parent="@android:style/TextAppearance.Material.Widget.Toolbar.Title">
+        <item name="android:textColor">@color/textOnPrimary</item>
+    </style>
 </resources>

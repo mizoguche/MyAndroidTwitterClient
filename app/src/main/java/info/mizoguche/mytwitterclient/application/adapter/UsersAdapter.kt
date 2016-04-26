@@ -3,7 +3,6 @@ package info.mizoguche.mytwitterclient.application.adapter
 import android.content.Context
 import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +19,6 @@ class UserViewHolder(var view: View, var binding: ViewUserBinding) : RecyclerVie
     val context = view.context
 
     fun bind(user: User){
-        Log.d("MyTwitterClient","${this.javaClass.canonicalName}#bind: ${user.toString()}")
         binding.user = user
         bindImage(binding.profileImage, user.profileImageUrl.big)
         binding.profileImage.setOnClickListener {
@@ -49,7 +47,6 @@ class UsersAdapter(val context: Context, val users: Users) : RecyclerView.Adapte
     }
 
     override fun getItemCount(): Int {
-        Log.d("MyTwitterClient","${this.javaClass.canonicalName}#ItemCount: ${users.count()}")
         return users.count()
     }
 }

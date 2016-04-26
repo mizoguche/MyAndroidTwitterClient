@@ -76,8 +76,12 @@ object  TwitterApi {
 
     fun <T> fetchResponseList(action: () -> ResponseList<T>) : Observable<ResponseList<T>> {
         return observable<ResponseList<T>> {
-            it.onNext(action())
-            it.onCompleted()
+            try{
+                it.onNext(action())
+                it.onCompleted()
+            }catch(e: Exception){
+                it.onError(e)
+            }
         }.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
     }

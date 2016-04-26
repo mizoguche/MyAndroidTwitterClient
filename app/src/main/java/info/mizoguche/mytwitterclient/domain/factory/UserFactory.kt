@@ -16,6 +16,7 @@ object  UserFactory {
             builder.profileBannerUrlMedium = user.profileBannerIPadRetinaURL
             builder.profileBannerUrlSmall = user.profileBannerMobileRetinaURL
         }
+        builder.description = user.description
         return User(builder)
     }
 }

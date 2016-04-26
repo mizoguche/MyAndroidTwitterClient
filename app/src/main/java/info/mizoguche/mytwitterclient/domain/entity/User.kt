@@ -9,6 +9,7 @@ data class ProfileImageUrl(val big: String, val medium: String, val small: Strin
 data class ProfileBannerUrl(val big: String, val medium: String, val small: String): Serializable {
     fun canLoad(): Boolean { return medium.length > 0 }
 }
+data class UserDescription(val value: String): Serializable
 
 class User(builder: UserBuilder) : Serializable {
     val id: UserId = UserId(builder.id)
@@ -23,6 +24,7 @@ class User(builder: UserBuilder) : Serializable {
             profileBannerUrl = ProfileBannerUrl("", "", "")
         }
     }
+    val description: UserDescription = UserDescription(builder.description)
 }
 
 class UserBuilder(id: Long){
@@ -35,4 +37,5 @@ class UserBuilder(id: Long){
     var profileBannerUrlBigger: String? = null
     var profileBannerUrlMedium: String? = null
     var profileBannerUrlSmall: String? = null
+    lateinit var description: String
 }
