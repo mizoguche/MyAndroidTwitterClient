@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="user" type="info.mizoguche.mytwitterclient.domain.entity.User" />
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/listItemTwoLineHeight"
+        >
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="@dimen/profileImage"
+            android:layout_height="@dimen/profileImage"
+            android:layout_marginLeft="@dimen/listItemHorizontalPadding"
+            android:layout_centerVertical="true"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/listItemWithIconTextLeftPadding"
+            android:layout_marginRight="@dimen/listItemHorizontalPadding"
+            android:orientation="vertical"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_vertical|left"
+            >
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{user.userName.value}"
+                android:textSize="@dimen/listItemPrimaryTextSize"
+                android:maxLines="1"
+                android:ellipsize="end"
+                />
+            <TextView
+                android:id="@+id/user_list_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{'@' + user.screenName.value}"
+                android:textSize="@dimen/listItemSecondaryTextSize"
+                android:textColor="@color/textWeak"
+                android:maxLines="1"
+                android:ellipsize="end"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

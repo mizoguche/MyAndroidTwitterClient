@@ -66,6 +66,14 @@ object  TwitterApi {
         return fetchResponseList<UserList> { twitter.getUserLists(twitter.id, true) }
     }
 
+    fun followers(userId: UserId): Observable<ResponseList<User>> {
+        return fetchResponseList<User> { twitter.getFollowersList(userId.value, -1, 50, true, true) }
+    }
+
+    fun followees(userId: UserId): Observable<ResponseList<User>> {
+        return fetchResponseList<User> { twitter.getFriendsList(userId.value, -1, 50, true, true) }
+    }
+
     fun <T> fetchResponseList(action: () -> ResponseList<T>) : Observable<ResponseList<T>> {
         return observable<ResponseList<T>> {
             it.onNext(action())
