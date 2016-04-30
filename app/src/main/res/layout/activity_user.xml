@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable name="user" type="info.mizoguche.mytwitterclient.domain.entity.User" />
+        <import type="android.databinding.ObservableBoolean" />
     </data>
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -54,21 +55,30 @@
                         />
                     <TextView
                         android:id="@+id/screen_name"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/user_name"
                         android:layout_alignStart="@id/user_name"
-                        android:layout_alignEnd="@id/user_name"
                         android:layout_marginTop="@dimen/marginSmall"
                         android:text="@{'@' + user.screenName.value}"
+                        />
+                    <TextView
+                        android:id="@+id/is_followee"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/screen_name"
+                        android:layout_toEndOf="@id/screen_name"
+                        android:layout_alignEnd="@id/user_name"
+                        android:layout_marginLeft="@dimen/marginSmall"
+                        android:text="@{user.isFollowee.toString()}"
                         />
                     <TextView
                         android:id="@+id/user_description"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/screen_name"
-                        android:layout_alignStart="@id/screen_name"
-                        android:layout_alignEnd="@id/screen_name"
+                        android:layout_alignStart="@id/user_name"
+                        android:layout_alignEnd="@id/user_name"
                         android:layout_marginTop="@dimen/marginSmall"
                         android:layout_marginBottom="@dimen/marginSmall"
                         android:text="@{user.description.value}"
@@ -103,7 +113,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             />
 
-        <android.support.design.widget.FloatingActionButton
+        <info.mizoguche.mytwitterclient.application.view.AnimatedFloatingActionButton
             android:id="@+id/floating_action_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -113,5 +123,34 @@
             app:layout_anchor="@id/image_view_profile_banner"
             app:layout_anchorGravity="bottom|right|end"
             />
+
+
+        <!-- Overlay that dims the screen -->
+        <com.gordonwong.materialsheetfab.DimOverlayFrameLayout
+            android:id="@+id/overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <!-- Circular reveal container for the sheet -->
+        <io.codetail.widget.RevealLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="end|top"
+            android:orientation="vertical">
+            <!-- Sheet that contains your items -->
+            <android.support.v7.widget.CardView
+                android:layout_width="@dimen/sheetWidth"
+                android:layout_height="wrap_content"
+                android:id="@+id/fab_sheet"
+                android:padding="@dimen/sheetSpacing"
+                >
+                <ListView
+                    android:id="@+id/list_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+            </android.support.v7.widget.CardView>
+
+        </io.codetail.widget.RevealLinearLayout>
     </android.support.design.widget.CoordinatorLayout>
 </layout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="user_activity_actions">
+        <item>@string/action_follow_unfollow</item>
+        <item>@string/action_add_remove_list</item>
+    </string-array>
+</resources>

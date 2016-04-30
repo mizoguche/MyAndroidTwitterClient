@@ -1,5 +1,6 @@
 package info.mizoguche.mytwitterclient.application.activity
 
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.databinding.DataBindingUtil
@@ -9,17 +10,23 @@ import android.support.design.widget.TabLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.graphics.Palette
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.Toast
+import com.gordonwong.materialsheetfab.MaterialSheetFab
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import info.mizoguche.mytwitterclient.R
 import info.mizoguche.mytwitterclient.application.adapter.UserTabPagerAdapter
+import info.mizoguche.mytwitterclient.application.view.AnimatedFloatingActionButton
 import info.mizoguche.mytwitterclient.databinding.ActivityUserBinding
 import info.mizoguche.mytwitterclient.domain.entity.User
+import info.mizoguche.mytwitterclient.domain.service.RelationshipService
 
 private const val IntentKeyUser = "user"
 
 class UserActivity : AppCompatActivity() {
     lateinit var binding: ActivityUserBinding
+    lateinit var materialSheetFab: MaterialSheetFab<AnimatedFloatingActionButton>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +34,8 @@ class UserActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView<ActivityUserBinding>(this, R.layout.activity_user)
         val user = intent.getSerializableExtra(IntentKeyUser) as User
+        user.fetchFollowingStatus()
+
         binding.user = user
         setColor(resources.getColor(R.color.primary, theme), resources.getColor(R.color.textOnPrimary, theme), resources.getColor(R.color.textWeakOnPrimary, theme))
         if(user.profileBannerUrl.canLoad()) {
@@ -74,12 +83,28 @@ class UserActivity : AppCompatActivity() {
             }
         }
 
-//        val params = binding.floatingActionButton.layoutParams as CoordinatorLayout.LayoutParams
-//        params.behavior = ScrollFABBehavior()
-//        binding.floatingActionButton.layoutParams = params
-//        binding.floatingActionButton.setOnClickListener {
-//            startActivity(TweetingActivity.createIntent(this))
-//        }
+
+        materialSheetFab = MaterialSheetFab<AnimatedFloatingActionButton>(binding.floatingActionButton,
+                binding.fabSheet, binding.overlay, resources.getColor(R.color.bg, theme), resources.getColor(R.color.accent, theme))
+
+        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, resources.getStringArray(R.array.user_activity_actions))
+        binding.listView.adapter = adapter
+        binding.listView.setOnItemClickListener { adapterView, view, i, l ->
+            val progress = ProgressDialog(this)
+            when(i){
+                0 -> {
+                    progress.show()
+                    RelationshipService.toggleFollowing(user)
+                            .subscribe {
+                                progress.dismiss()
+                            }
+                }
+                1-> {
+                    Toast.makeText(this, "Not implemented yet", Toast.LENGTH_SHORT).show()
+                }
+            }
+            materialSheetFab.hideSheet()
+        }
     }
 
     private fun setColor(bgColor: Int, textColor: Int, weakTextColor: Int){
@@ -91,6 +116,7 @@ class UserActivity : AppCompatActivity() {
         binding.profileContainer.setBackgroundColor(bgColor)
         binding.userName.setTextColor(textColor)
         binding.screenName.setTextColor(weakTextColor)
+        binding.isFollowee.setTextColor(weakTextColor)
         binding.userDescription.setTextColor(textColor)
     }
 

@@ -33,4 +33,7 @@
     <dimen name="profileImagePadding">@dimen/touchTargetImagePadding</dimen>
     <dimen name="profileImageQuoted">30dp</dimen>
     <dimen name="profileImageRetweetedBy">20dp</dimen>
+
+    <dimen name="sheetWidth">260dp</dimen>
+    <dimen name="sheetSpacing">10dp</dimen>
 </resources>
