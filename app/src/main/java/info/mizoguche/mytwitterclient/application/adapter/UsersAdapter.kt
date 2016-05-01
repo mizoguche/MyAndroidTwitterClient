@@ -21,10 +21,12 @@ class UserViewHolder(var view: View, var binding: ViewUserBinding) : RecyclerVie
     fun bind(user: User){
         binding.user = user
         bindImage(binding.profileImage, user.profileImageUrl.big)
-        binding.profileImage.setOnClickListener {
-            context.startActivity(UserActivity.createIntent(context, user))
-        }
+        binding.root.setOnClickListener { onClick(user) }
         binding.executePendingBindings()
+    }
+
+    private fun onClick(user: User){
+        context.startActivity(UserActivity.createIntent(context, user))
     }
 
     private fun bindImage(view: ImageView, url: String){

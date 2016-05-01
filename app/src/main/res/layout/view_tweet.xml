@@ -14,6 +14,7 @@
         android:paddingBottom="@dimen/listItemVerticalPadding"
         android:paddingLeft="@dimen/listItemHorizontalPadding"
         android:paddingRight="@dimen/listItemHorizontalPadding"
+        android:background="?android:attr/selectableItemBackground"
         >
 
         <de.hdodenhof.circleimageview.CircleImageView

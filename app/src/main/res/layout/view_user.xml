@@ -7,6 +7,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/listItemTwoLineHeight"
+        android:background="?android:attr/selectableItemBackground"
         >
         <ImageView
             android:id="@+id/profile_image"

@@ -30,6 +30,7 @@ class UserListViewHolder(binding: ViewUserListBinding) {
                     binding.executePendingBindings()
                     Log.d("MyTwitterClient", "checked: ${b}, selection: ${userListSelection.userList.name}")
                 })
+        binding.root.setOnClickListener { binding.userListCheckbox.toggle() }
     }
 }
 
