@@ -2,11 +2,12 @@ package info.mizoguche.mytwitterclient.domain.entity
 
 import android.databinding.BaseObservable
 import info.mizoguche.mytwitterclient.domain.factory.UserFactory
+import java.io.Serializable
 import java.util.*
 
-data class TweetId(val value: Long)
-data class TweetText(val value: String)
-data class TweetDate(val value: Date)
+data class TweetId(val value: Long): Serializable
+data class TweetText(val value: String): Serializable
+data class TweetDate(val value: Date): Serializable
 public enum class TweetType {
     Tweet, Retweet
 }
@@ -17,7 +18,7 @@ public enum class LikeStatus {
     None, Liked
 }
 
-class Tweet(builder: TweetBuilder) : BaseObservable() {
+class Tweet(builder: TweetBuilder) : BaseObservable(), Serializable {
     val id: TweetId = TweetId(builder.id)
     val text: TweetText = TweetText(builder.text)
     val tweetedBy: User = UserFactory.create(builder.tweetedBy)

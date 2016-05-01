@@ -20,6 +20,14 @@ enum class FollowingStatus {
         }
     }
 }
+enum class TweetPrivacy {
+    Public, Protected;
+    companion object{
+        fun get(isProtected: Boolean): TweetPrivacy {
+            return if(isProtected) Protected  else Public
+        }
+    }
+}
 
 class User(builder: UserBuilder) : BaseObservable(), Serializable {
     val id: UserId = UserId(builder.id)
@@ -43,6 +51,7 @@ class User(builder: UserBuilder) : BaseObservable(), Serializable {
             _isFollowee = value
             notifyChange()
         }
+    val tweetPrivacy: TweetPrivacy = builder.tweetPrivacy
 
     fun fetchFollowingStatus() {
         RelationshipService.isFollowing(id)
@@ -61,4 +70,5 @@ class UserBuilder(id: Long){
     var profileBannerUrlMedium: String? = null
     var profileBannerUrlSmall: String? = null
     lateinit var description: String
+    lateinit var tweetPrivacy: TweetPrivacy
 }

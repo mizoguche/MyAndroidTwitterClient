@@ -33,6 +33,7 @@
         <activity android:name=".application.activity.TabPreferencesActivity" />
         <activity android:name=".application.activity.TweetingActivity" />
         <activity android:name=".application.activity.UserActivity" />
+        <activity android:name=".application.activity.TweetActivity" />
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

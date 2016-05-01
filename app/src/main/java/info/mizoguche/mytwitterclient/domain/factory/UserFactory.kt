@@ -1,5 +1,6 @@
 package info.mizoguche.mytwitterclient.domain.factory
 
+import info.mizoguche.mytwitterclient.domain.entity.TweetPrivacy
 import info.mizoguche.mytwitterclient.domain.entity.User
 import info.mizoguche.mytwitterclient.domain.entity.UserBuilder
 
@@ -17,6 +18,7 @@ object  UserFactory {
             builder.profileBannerUrlSmall = user.profileBannerMobileRetinaURL
         }
         builder.description = user.description
+        builder.tweetPrivacy = TweetPrivacy.get(user.isProtected)
         return User(builder)
     }
 }

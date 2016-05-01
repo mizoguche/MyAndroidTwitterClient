@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <data>
+        <variable name="tweet" type="info.mizoguche.mytwitterclient.domain.entity.Tweet" />
+        <import type="info.mizoguche.mytwitterclient.domain.entity.TweetType" />
+        <import type="info.mizoguche.mytwitterclient.domain.entity.TweetPrivacy" />
+        <import type="android.view.View" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:theme="@style/ToolbarTheme"
+            app:popupTheme="@style/ToolbarPopupTheme"
+            />
+
+        <RelativeLayout
+            android:id="@+id/tweet_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/listItemVerticalPadding"
+            android:paddingBottom="@dimen/listItemVerticalPadding"
+            android:paddingLeft="@dimen/listItemHorizontalPadding"
+            android:paddingRight="@dimen/listItemHorizontalPadding"
+            >
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image_retweeted_by"
+                android:layout_width="@dimen/profileImageRetweetedBy"
+                android:layout_height="@dimen/profileImageRetweetedBy"
+                android:layout_alignRight="@+id/profile_image"
+                android:paddingRight="@dimen/profileImagePadding"
+                android:layout_marginBottom="@dimen/marginSmaller"
+                android:visibility="@{tweet.type == TweetType.Retweet ? View.VISIBLE : View.GONE}"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{tweet.retweetedBy.userName.value + " retweeted"}'
+                android:layout_alignLeft="@+id/tweeted_by"
+                android:layout_alignBottom="@+id/profile_image_retweeted_by"
+                android:textColor="@color/textWeak"
+                android:visibility="@{tweet.type == TweetType.Retweet ? View.VISIBLE : View.GONE}"
+                android:textSize="@dimen/tweetSecondaryTextSize"
+                />
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_below="@id/profile_image_retweeted_by"
+                android:layout_width="@dimen/profileImage"
+                android:layout_height="@dimen/profileImage"
+                android:padding="@dimen/profileImagePadding"
+                />
+
+            <TextView
+                android:id="@+id/tweeted_by"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{tweet.tweetedBy.userName.value}"
+                android:layout_marginLeft="@dimen/marginSmall"
+                android:layout_toRightOf="@id/profile_image"
+                android:layout_alignTop="@id/profile_image"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textSize="@dimen/tweetPrimaryTextSize"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{'@' + tweet.tweetedBy.screenName.value}"
+                android:layout_toRightOf="@id/tweeted_by"
+                android:layout_alignTop="@id/profile_image"
+                android:layout_marginLeft="@dimen/marginSmaller"
+                android:textColor="@color/textWeak"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textSize="@dimen/tweetPrimaryTextSize"
+                />
+
+            <TextView
+                android:id="@+id/tweet_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{tweet.text.value}"
+                android:layout_alignLeft="@id/tweeted_by"
+                android:layout_below="@id/tweeted_by"
+                android:layout_marginTop="@dimen/marginSmaller"
+                android:autoLink="web"
+                android:textSize="@dimen/tweetPrimaryTextSize"
+                />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:paddingBottom="@dimen/listItemVerticalPadding"
+            android:paddingLeft="@dimen/listItemHorizontalPadding"
+            android:paddingRight="@dimen/listItemHorizontalPadding"
+            >
+
+            <Button
+                android:id="@+id/btn_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Like"
+                />
+
+            <Button
+                android:id="@+id/btn_retweet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginSmaller"
+                android:text="RT"
+                android:enabled="@{tweet.tweetedBy.tweetPrivacy == TweetPrivacy.Public}"
+                />
+
+            <Button
+                android:id="@+id/btn_reply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginSmaller"
+                android:text="Reply"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</layout>
