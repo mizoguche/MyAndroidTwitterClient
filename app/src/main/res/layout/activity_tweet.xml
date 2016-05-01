@@ -34,7 +34,7 @@
             android:paddingRight="@dimen/listItemHorizontalPadding"
             >
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <ImageView
                 android:id="@+id/profile_image_retweeted_by"
                 android:layout_width="@dimen/profileImageRetweetedBy"
                 android:layout_height="@dimen/profileImageRetweetedBy"
@@ -56,7 +56,7 @@
                 />
 
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <ImageView
                 android:id="@+id/profile_image"
                 android:layout_below="@id/profile_image_retweeted_by"
                 android:layout_width="@dimen/profileImage"
