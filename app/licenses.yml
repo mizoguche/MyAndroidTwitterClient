@@ -1,0 +1,61 @@
+# Libraries not listed in licenses.yml:
+- artifact: com.android.databinding:+:+
+  name: Data Binding
+  copyrightHolder: The Android Open Source Project
+  license: The Apache Software License, Version 2.0
+- artifact: com.android.support:+:+
+  name: Android Support Libraries
+  copyrightHolder: The Android Open Source Project
+  license: The Apache Software License, Version 2.0
+- artifact: com.github.asyl.animation:arcanimator:+
+  name: ArcAnimator
+  copyrightHolder: Asylbek Isakov
+  license: The MIT License (MIT)
+  url: https://github.com/asyl/ArcAnimator
+- artifact: com.google.code.gson:gson:+
+  name: Gson
+  copyrightHolder: Google Inc.
+  license: The Apache Software License, Version 2.0
+- artifact: org.jetbrains.kotlin:+:+
+  name: Kotlin
+  copyrightHolder: JetBrains s.r.o.
+  license:  The Apache Software License, Version 2.0
+- artifact: com.gordonwong:material-sheet-fab:+
+  name: MaterialSheetFab
+  copyrightHolder: Gordon Wong
+  license: The MIT License (MIT)
+  url: https://github.com/gowong/material-sheet-fab
+- artifact: com.nineoldandroids:library:+
+  name: Nine Old Androids
+  copyrightHolder: Jake Wharton
+  license:  The Apache Software License, Version 2.0
+- artifact: com.github.orhanobut:hawk:+
+  name: Hawk
+  copyrightHolder: Orhan Obut
+  license: Apache License 2.0
+  url: https://github.com/orhanobut/hawk
+- artifact: com.squareup.picasso:picasso:+
+  name: Picasso
+  copyrightHolder: Square, Inc.
+  license: The Apache License, Version 2.0
+- artifact: io.reactivex:rxandroid:+
+  name: RxAndroid
+  copyrightHolder: The RxAndroid authors
+  license: The Apache Software License, Version 2.0
+  url: https://github.com/ReactiveX/RxAndroid
+- artifact: io.reactivex:rxjava:+
+  name: RxJava
+  copyrightHolder: Netflix, Inc.
+  license: The Apache Software License, Version 2.0
+  url: https://github.com/ReactiveX/RxJava
+- artifact: io.reactivex:rxkotlin:+
+  name: RxKotlin
+  copyrightHolder: Netflix, Inc.
+  license: The Apache Software License, Version 2.0
+  url: https://github.com/ReactiveX/RxKotlin
+- artifact: org.twitter4j:twitter4j-core:+
+  name: Twitter4j
+  copyrightHolder: Yusuke Yamamoto
+  license: Apache License 2.0
+  url: http://twitter4j.org/
+

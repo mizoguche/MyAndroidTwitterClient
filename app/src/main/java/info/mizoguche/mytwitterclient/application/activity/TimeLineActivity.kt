@@ -58,9 +58,13 @@ class TimeLineActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if(item?.itemId == R.id.action_settings){
-            val intent = TabPreferencesActivity.createIntent(this)
-            startActivity(intent)
+        when(item?.itemId){
+            R.id.action_settings -> {
+                startActivity(TabPreferencesActivity.createIntent(this))
+            }
+            R.id.action_licenses -> {
+                startActivity(LicensesActivity.createIntent(this))
+            }
         }
         return super.onOptionsItemSelected(item)
     }

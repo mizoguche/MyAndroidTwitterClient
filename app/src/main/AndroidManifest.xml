@@ -34,6 +34,7 @@
         <activity android:name=".application.activity.TweetingActivity" />
         <activity android:name=".application.activity.UserActivity" />
         <activity android:name=".application.activity.TweetActivity" />
+        <activity android:name=".application.activity.LicensesActivity" />
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

@@ -54,11 +54,16 @@ buildscript {
     ext.kotlin_version = '1.0.0'
     repositories {
         mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.cookpad.android.licensetools:license-tools-plugin:0.12.0'
     }
 }
+
+apply plugin: 'com.cookpad.android.licensetools'
+
 repositories {
     mavenCentral()
 }
