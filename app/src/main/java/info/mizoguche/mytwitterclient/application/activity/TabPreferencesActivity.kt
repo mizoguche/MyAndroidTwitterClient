@@ -77,6 +77,8 @@ class TabPreferencesActivity: AppCompatActivity() {
         recyclerView.addItemDecoration(DividerItemDecoration(this))
 
         setSupportActionBar(binding.toolBar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "タブ設定"
     }
 
     fun saveTabs(){
@@ -98,6 +100,7 @@ class TabPreferencesActivity: AppCompatActivity() {
                 })
             }
             R.id.action_add_home_time_line -> tabs.add(Tab(TabName("Home"), TabDetail(TabDetailHome, 1)))
+            android.R.id.home -> finish()
         }
         return super.onOptionsItemSelected(item)
     }
