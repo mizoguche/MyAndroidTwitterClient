@@ -2,6 +2,8 @@ package info.mizoguche.mytwitterclient.application.view
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
+import android.widget.Toast
 import info.mizoguche.mytwitterclient.application.adapter.UsersAdapter
 import info.mizoguche.mytwitterclient.domain.collection.Users
 import info.mizoguche.mytwitterclient.domain.entity.User
@@ -33,11 +35,14 @@ class SwipeRefreshUsersView(context: Context, attrs: AttributeSet): SwipeRefresh
     lateinit var usersTab: UsersTab
     override fun fetchCollection() {
         usersTab.fetchUsers()
-                .subscribe {
+                .subscribe({
                     val adapter = UsersAdapter(context, it)
                     recyclerView.adapter = adapter
                     isRefreshing = false
-                }
+                }, {
+                    Log.d(this.javaClass.simpleName, "", it)
+                    ErrorToastFactory.show(context, it, Toast.LENGTH_LONG)
+                })
     }
 
     override fun getTitle(): String {
