@@ -5,7 +5,7 @@
         android:title="Add Home Time Line"
         app:showAsAction="never"/>
 
-    <item android:id="@+id/action_add_mention_time_line"
+    <item android:id="@+id/action_add_mentions_time_line"
         android:title="Add Mention Time Line"
         app:showAsAction="never"/>
 

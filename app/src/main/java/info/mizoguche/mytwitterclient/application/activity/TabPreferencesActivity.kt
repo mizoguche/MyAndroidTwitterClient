@@ -18,10 +18,7 @@ import info.mizoguche.mytwitterclient.application.view.UserListDialog
 import info.mizoguche.mytwitterclient.databinding.ActivityTabPreferencesBinding
 import info.mizoguche.mytwitterclient.domain.collection.Tabs
 import info.mizoguche.mytwitterclient.domain.repository.TabRepository
-import info.mizoguche.mytwitterclient.domain.value.Tab
-import info.mizoguche.mytwitterclient.domain.value.TabDetail
-import info.mizoguche.mytwitterclient.domain.value.TabDetailHome
-import info.mizoguche.mytwitterclient.domain.value.TabName
+import info.mizoguche.mytwitterclient.domain.value.*
 
 class TabPreferencesActivity: AppCompatActivity() {
     lateinit var tabs: Tabs
@@ -50,7 +47,7 @@ class TabPreferencesActivity: AppCompatActivity() {
                 val from = viewHolder?.adapterPosition as Int
                 val to = target?.adapterPosition as Int
                 adapter.move(from, to)
-                saveTabs()
+                saveTabs(false)
                 return true
             }
 
@@ -81,8 +78,11 @@ class TabPreferencesActivity: AppCompatActivity() {
         supportActionBar?.title = "タブ設定"
     }
 
-    fun saveTabs(){
+    fun saveTabs(notify: Boolean = true){
         TabRepository.putTabs(tabs)
+        if(notify){
+            adapter.notifyDataSetChanged()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -95,11 +95,17 @@ class TabPreferencesActivity: AppCompatActivity() {
             R.id.action_add_user_list -> {
                 UserListDialog.show(this, { addedTabs ->
                     tabs.addAll(addedTabs)
-                    TabRepository.putTabs(tabs)
-                    adapter.notifyDataSetChanged()
+                    saveTabs()
                 })
             }
-            R.id.action_add_home_time_line -> tabs.add(Tab(TabName("Home"), TabDetail(TabDetailHome, 1)))
+            R.id.action_add_home_time_line -> {
+                tabs.add(Tab(TabName("Home"), TabDetail(TabDetailHome, 1)))
+                saveTabs()
+            }
+            R.id.action_add_mentions_time_line -> {
+                tabs.add(Tab(TabName("Mentions"), TabDetail(TabDetailMentionsTimeLine, 1)))
+                saveTabs()
+            }
             android.R.id.home -> finish()
         }
         return super.onOptionsItemSelected(item)

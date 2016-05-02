@@ -22,6 +22,10 @@ object  TimeLineRepository {
         return mapStatusListToTimeLine(TwitterApi.userTimeLine(userId))
     }
 
+    fun fetchMentionsTimeLine(): Observable<TimeLine> {
+        return mapStatusListToTimeLine(TwitterApi.mentionsTimeLine())
+    }
+
     private fun mapStatusListToTimeLine(responseList: Observable<ResponseList<Status>>) : Observable<TimeLine>{
         return responseList
                 .map { it.map { TweetFactory.create(it) }.toList() }

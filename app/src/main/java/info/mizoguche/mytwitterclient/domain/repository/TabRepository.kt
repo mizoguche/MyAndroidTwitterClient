@@ -18,5 +18,12 @@ object  TabRepository {
 
     fun putTabs(tabs: Tabs){
         Hawk.put("Tabs", tabs)
+        Hawk.put("TabsUpdated", true)
+    }
+
+    fun isUpdated(): Boolean{
+        val updated = Hawk.get<Boolean>("TabsUpdated")
+        Hawk.put("TabsUpdated", false)
+        return updated
     }
 }

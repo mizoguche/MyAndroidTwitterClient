@@ -62,6 +62,10 @@ object  TwitterApi {
         return fetchResponseList<Status> { twitter.getUserTimeline(userId.value, Paging(1, 50)) }
     }
 
+    fun mentionsTimeLine() : Observable<ResponseList<Status>> {
+        return fetchResponseList<Status> { twitter.getMentionsTimeline(Paging(1, 50)) }
+    }
+
     fun ownLists(): Observable<ResponseList<UserList>> {
         return fetchResponseList<UserList> { twitter.getUserLists(twitter.id, true) }
     }

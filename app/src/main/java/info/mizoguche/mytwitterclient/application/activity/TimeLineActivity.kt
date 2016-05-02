@@ -17,6 +17,8 @@ import info.mizoguche.mytwitterclient.infrastructure.TwitterApi
 import jp.tsur.booksearch.ui.ScrollFABBehavior
 
 class TimeLineActivity : AppCompatActivity() {
+    lateinit var binding: ActivityTimeLineBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_time_line)
@@ -27,11 +29,9 @@ class TimeLineActivity : AppCompatActivity() {
             return
         }
 
-        val binding = DataBindingUtil.setContentView<ActivityTimeLineBinding>(this, R.layout.activity_time_line)
-        val tabs = TabRepository.getTabs()
-        binding.viewPager.adapter = TabPagerAdapter(tabs, this)
+        binding = DataBindingUtil.setContentView<ActivityTimeLineBinding>(this, R.layout.activity_time_line)
+        updateTabs()
         binding.tabLayout.tabMode = TabLayout.MODE_SCROLLABLE
-        binding.tabLayout.setupWithViewPager(binding.viewPager)
         binding.tabLayout.setOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
             override fun onTabUnselected(tab: TabLayout.Tab?) { }
 
@@ -49,6 +49,20 @@ class TimeLineActivity : AppCompatActivity() {
         binding.floatingActionButton.layoutParams = params
         binding.floatingActionButton.setOnClickListener {
             startActivity(TweetingActivity.createIntent(this))
+        }
+    }
+
+    private fun updateTabs() {
+        val tabs = TabRepository.getTabs()
+        binding.viewPager.adapter = TabPagerAdapter(tabs, this)
+        binding.viewPager.adapter.notifyDataSetChanged()
+        binding.tabLayout.setupWithViewPager(binding.viewPager)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(TabRepository.isUpdated()){
+            updateTabs()
         }
     }
 
