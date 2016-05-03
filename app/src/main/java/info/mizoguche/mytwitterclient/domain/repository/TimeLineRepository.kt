@@ -1,9 +1,9 @@
 package info.mizoguche.mytwitterclient.domain.repository
 
 import info.mizoguche.mytwitterclient.domain.collection.TimeLine
+import info.mizoguche.mytwitterclient.domain.entity.TweetFactory
 import info.mizoguche.mytwitterclient.domain.entity.UserId
 import info.mizoguche.mytwitterclient.domain.entity.UserListId
-import info.mizoguche.mytwitterclient.domain.factory.TweetFactory
 import info.mizoguche.mytwitterclient.infrastructure.TwitterApi
 import rx.Observable
 import twitter4j.ResponseList

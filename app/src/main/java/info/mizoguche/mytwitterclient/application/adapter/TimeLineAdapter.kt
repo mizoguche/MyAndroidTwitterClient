@@ -2,16 +2,23 @@ package info.mizoguche.mytwitterclient.application.adapter
 
 import android.content.Context
 import android.databinding.DataBindingUtil
+import android.support.v4.view.ViewCompat
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
 import info.mizoguche.mytwitterclient.R
+import info.mizoguche.mytwitterclient.application.activity.ImagePreviewActivity
 import info.mizoguche.mytwitterclient.application.activity.TweetActivity
 import info.mizoguche.mytwitterclient.application.activity.UserActivity
+import info.mizoguche.mytwitterclient.application.view.ViewHelper
 import info.mizoguche.mytwitterclient.application.view.picasso.PicassoUtil
 import info.mizoguche.mytwitterclient.databinding.ViewTweetBinding
 import info.mizoguche.mytwitterclient.domain.collection.TimeLine
+import info.mizoguche.mytwitterclient.domain.entity.MediaType
 import info.mizoguche.mytwitterclient.domain.entity.Tweet
 import info.mizoguche.mytwitterclient.domain.entity.TweetType
 
@@ -33,6 +40,26 @@ class TweetViewHolder(view: View, binding: ViewTweetBinding) : RecyclerView.View
         binding.tweetContainer.setOnClickListener {
             val intent = TweetActivity.createIntent(context, tweet)
             context.startActivity(intent)
+        }
+
+        binding.imageContainer.removeAllViews()
+        tweet.mediaEntities.forEach {
+            if(it.type == MediaType.Photo) {
+                val media = it
+                val imageView = View.inflate(context, R.layout.view_image_thumbnail, null) as ImageView
+                ViewCompat.setTransitionName(imageView, "image")
+                val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewHelper.calculatePixelFromDp(48, context))
+                val margin = ViewHelper.calculatePixelFromDp(4, context)
+                params.setMargins(0, margin, 0, margin)
+
+                imageView.layoutParams = params
+                imageView.setOnClickListener {
+                    context.startActivity(ImagePreviewActivity.createIntent(context, tweet.mediaEntities, media))
+                }
+                binding.imageContainer.addView(imageView)
+                PicassoUtil.bindImage(context, imageView, media.url.value)
+                Log.d(this.javaClass.simpleName, "${media.url.value}")
+            }
         }
     }
 }

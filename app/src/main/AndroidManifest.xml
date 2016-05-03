@@ -35,6 +35,7 @@
         <activity android:name=".application.activity.UserActivity" />
         <activity android:name=".application.activity.TweetActivity" />
         <activity android:name=".application.activity.LicensesActivity" />
+        <activity android:name=".application.activity.ImagePreviewActivity" />
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
